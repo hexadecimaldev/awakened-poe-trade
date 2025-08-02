@@ -34,7 +34,7 @@ jobs:
     needs: renderer
     strategy:
       matrix:
-        os: [ubuntu-22.04]
+        os: [windows-2022, ubuntu-22.04]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
@@ -52,5 +52,14 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: Hash
+      if: ${{ startsWith(matrix.os, 'windows') }}
+      run: type .\main\dist\latest.yml
+    - name: Hash
       if: ${{ startsWith(matrix.os, 'ubuntu') }}
       run: cat ./main/dist/latest-linux.yml
+    - name: Upload release asset
+      uses: softprops/action-gh-release@v2
+      with:
+        files: ./main/dist/*
+      env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
