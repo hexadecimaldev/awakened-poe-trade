@@ -2,10 +2,8 @@ name: Build
 
 on:
   push:
-    branches:
-      - 'master'
-    tags-ignore:
-      - '**'
+    tags:
+      - 'v*'
     paths-ignore:
       - 'docs/**'
       - README.md
