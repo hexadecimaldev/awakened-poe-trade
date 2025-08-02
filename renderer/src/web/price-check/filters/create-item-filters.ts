@@ -24,8 +24,8 @@ export function createFilters (
     searchExact: {},
     trade: {
       offline: false,
-      onlineInLeague: false,
-      listed: undefined,
+      onlineInLeague: true,
+      listed: '3days',
       currency: opts.currency,
       league: opts.league,
       collapseListings: opts.collapseListings
